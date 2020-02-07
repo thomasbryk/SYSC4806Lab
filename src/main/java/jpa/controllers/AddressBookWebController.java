@@ -18,9 +18,8 @@ public class AddressBookWebController {
     private AddressBookRepository addressBookRepository;
     @Autowired
     private BuddyInfoRepository buddyInfoRepository;
-    private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/addressBook")
+    @GetMapping("/addressbook")
     public String newAddressBook(Model model) {
         AddressBook ab = new AddressBook();
         addressBookRepository.save(ab);
