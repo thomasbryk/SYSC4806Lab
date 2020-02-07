@@ -24,7 +24,7 @@ public class AddressBookWebController {
         AddressBook ab = new AddressBook();
         addressBookRepository.save(ab);
         model.addAttribute("addressBook", ab);
-        return "addressBook";
+        return "addressbook";
     }
 
     @GetMapping("/addBuddy")
