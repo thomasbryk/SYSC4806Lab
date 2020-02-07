@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="addressBook" class="jpa.models.AddressBook"></bean>
+    <bean id="addressBookController" class="jpa.AddressBookController">
+        <property name="model">
+            <ref bean="addressBook"></ref>
+        </property>
+        <property name="view">
+            <ref bean="addressBookView"></ref>
+        </property>
+    </bean>
+    <bean id="addressBookView" class="jpa.views.AddressBookView" init-method="initView">
+        <property name="controller">
+            <ref bean="addressBookController"></ref>
+        </property>
+    </bean>
+</beans>
