@@ -5,9 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h3>AddressBook created</h3>
-<p th:text="'ID: ' + ${addressBook.id}" />
-    <a href="/addBuddy"><p>Add a new buddy</p></a>
-    <a href="/">Home</a>
+    <h1>Create new AddressBook</h1>
+    <form action="/">
+        <input type="submit" value="Home" />
+    </form><br>
+    <form action="#" th:action="@{/addAddressbook}" method="post">
+        <input type="submit" value="Create new AddressBook"/>
+    </form>
+    <br>
+    <h3>AddressBooks</h3>
+    <th:block th:each="addressBook : ${addressBooks}">
+        <p>Address Book <a th:href="@{/displayAddressBook(id=${addressBook.id})}" th:text="${addressBook.id}"></a></p>
+    </th:block>
 </body>
 </html>

@@ -6,11 +6,10 @@ import jpa.models.BuddyInfo;
 import jpa.repositories.AddressBookRepository;
 import jpa.repositories.BuddyInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/")
 public class AddressBookWebController {
 
@@ -19,27 +18,31 @@ public class AddressBookWebController {
     @Autowired
     private BuddyInfoRepository buddyInfoRepository;
 
-    @GetMapping("/addressbook")
-    public String newAddressBook(Model model) {
+
+    @GetMapping("/rest_getAddressBook")
+    public AddressBook getAddressBook(@RequestParam(value = "id") long id) {
+        return addressBookRepository.findById(id);
+    }
+
+    @PostMapping("/rest_addAddressbook")
+    public AddressBook addAddressBook(){
         AddressBook ab = new AddressBook();
         addressBookRepository.save(ab);
-        model.addAttribute("addressBook", ab);
-        return "addressbook";
+        return ab;
     }
 
-    @GetMapping("/addBuddy")
-    public String addBuddy(Model model) {
-        model.addAttribute("buddy", new BuddyInfo());
-        return "addBuddy";
+    @GetMapping("/rest_getBuddy")
+    public BuddyInfo getBuddy(@RequestParam(value = "id") long id) {
+        return buddyInfoRepository.findById(id);
     }
 
-    @PostMapping("/addBuddy")
-    public String addBuddy(@ModelAttribute BuddyInfo buddy, Model model) {
+    @PostMapping("/rest_addBuddy")
+    public BuddyInfo addBuddy(@RequestParam(value = "id") long id, @RequestParam(value = "name") String name, @RequestParam(value = "number") String number) {
+        BuddyInfo buddy = new BuddyInfo(name,number);
         buddyInfoRepository.save(buddy);
-        AddressBook ab = addressBookRepository.findById(1L);
+        AddressBook ab = addressBookRepository.findById(id);
         ab.addBuddy(buddy);
-        model.addAttribute("addressBook", ab);
         addressBookRepository.save(ab);
-        return "displayAddressBook";
+        return buddy;
     }
 }
