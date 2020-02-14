@@ -23,12 +23,19 @@ public class TestingWebApplicationTest {
 
     @Test
     public void createAddressBook() throws Exception {
-        this.mockMvc.perform(post("/addressbook")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(post("/rest_addAddressbook")).andDo(print()).andExpect(status().isOk());
     }
 
     @Test
     public void getAddressBook() throws Exception {
         this.mockMvc.perform(post("/rest_addAddressbook"));
-        this.mockMvc.perform(get("/rest_getAddressBook").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("AddressBook id=1")));
+        this.mockMvc.perform(get("/rest_getAddressBook").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void createBuddies() throws Exception {
+        this.mockMvc.perform(post("/rest_addAddressbook"));
+        this.mockMvc.perform(get("/rest_getAddressBook").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(post("/rest_addBuddy").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1").param("name", "Thomas").param("number", "123456789")).andDo(print()).andExpect(status().isOk());
     }
 }
