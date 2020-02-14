@@ -19,24 +19,24 @@ public class AddressBookWebController {
     private BuddyInfoRepository buddyInfoRepository;
 
 
-    @GetMapping("/rest_getAddressBook")
+    @GetMapping("/rest/getAddressBook")
     public AddressBook getAddressBook(@RequestParam(value = "id") long id) {
         return addressBookRepository.findById(id);
     }
 
-    @PostMapping("/rest_addAddressbook")
+    @PostMapping("/rest/addAddressbook")
     public AddressBook addAddressBook(){
         AddressBook ab = new AddressBook();
         addressBookRepository.save(ab);
         return ab;
     }
 
-    @GetMapping("/rest_getBuddy")
+    @GetMapping("/rest/getBuddy")
     public BuddyInfo getBuddy(@RequestParam(value = "id") long id) {
         return buddyInfoRepository.findById(id);
     }
 
-    @PostMapping("/rest_addBuddy")
+    @PostMapping("/rest/addBuddy")
     public BuddyInfo addBuddy(@RequestParam(value = "id") long id, @RequestParam(value = "name") String name, @RequestParam(value = "number") String number) {
         BuddyInfo buddy = new BuddyInfo(name,number);
         buddyInfoRepository.save(buddy);
