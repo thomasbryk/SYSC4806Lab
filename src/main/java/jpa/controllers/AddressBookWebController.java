@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
 public class AddressBookWebController {
 
     @Autowired
@@ -18,12 +17,18 @@ public class AddressBookWebController {
     @Autowired
     private BuddyInfoRepository buddyInfoRepository;
 
+    @CrossOrigin
+    @GetMapping("/rest/getAddressBooks")
+    public Iterable<AddressBook> getAddressBooks() {
+        return addressBookRepository.findAll();
+    }
 
     @GetMapping("/rest/getAddressBook")
     public AddressBook getAddressBook(@RequestParam(value = "id") long id) {
         return addressBookRepository.findById(id);
     }
 
+    @CrossOrigin
     @PostMapping("/rest/addAddressbook")
     public AddressBook addAddressBook(){
         AddressBook ab = new AddressBook();
