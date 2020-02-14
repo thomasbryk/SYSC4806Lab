@@ -28,7 +28,7 @@ public class TestingWebApplicationTest {
 
     @Test
     public void getAddressBook() throws Exception {
-        this.mockMvc.perform(post("/addressbook"));
-        this.mockMvc.perform(get("/addressbook").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("AddressBook id=1")));
+        this.mockMvc.perform(post("/rest_addAddressbook"));
+        this.mockMvc.perform(get("/rest_getAddressBook").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("AddressBook id=1")));
     }
 }
